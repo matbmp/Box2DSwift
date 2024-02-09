@@ -183,7 +183,7 @@ open class b2MouseJoint : b2Joint {
 	  let mass = m_bodyB.mass
 
 	  // Frequency
-	  let omega = 2.0 * b2_pi * m_frequencyHz
+      let omega = 2.0 * b2SettingInstance.b2_pi * m_frequencyHz
 
 	  // Damping coefficient
 	  let d = 2.0 * mass * m_dampingRatio * omega
@@ -195,7 +195,7 @@ open class b2MouseJoint : b2Joint {
 	  // gamma has units of inverse mass.
 	  // beta has units of inverse time.
 	  let h = data.step.dt
-	  assert(d + h * k > b2_epsilon)
+      assert(d + h * k > b2SettingInstance.b2_epsilon)
 	  m_gamma = h * (d + h * k)
 	  if m_gamma != 0.0 {
 		  m_gamma = 1.0 / m_gamma

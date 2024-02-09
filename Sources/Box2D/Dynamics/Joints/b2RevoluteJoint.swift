@@ -341,7 +341,7 @@ open class b2RevoluteJoint : b2Joint {
     
     if m_enableLimit && fixedRotation == false {
       let jointAngle = aB - aA - m_referenceAngle
-      if abs(m_upperAngle - m_lowerAngle) < 2.0 * b2_angularSlop {
+        if abs(m_upperAngle - m_lowerAngle) < 2.0 * b2SettingInstance.b2_angularSlop {
         m_limitState = b2LimitState.equalLimits
       }
       else if jointAngle <= m_lowerAngle {
@@ -506,7 +506,7 @@ open class b2RevoluteJoint : b2Joint {
       
       if m_limitState == b2LimitState.equalLimits {
         // Prevent large angular corrections
-        let C = b2Clamp(angle - m_lowerAngle, -b2_maxAngularCorrection, b2_maxAngularCorrection)
+          let C = b2Clamp(angle - m_lowerAngle, -b2SettingInstance.b2_maxAngularCorrection, b2SettingInstance.b2_maxAngularCorrection)
         limitImpulse = -m_motorMass * C
         angularError = abs(C)
       }
@@ -515,7 +515,7 @@ open class b2RevoluteJoint : b2Joint {
         angularError = -C
         
         // Prevent large angular corrections and allow some slop.
-        C = b2Clamp(C + b2_angularSlop, -b2_maxAngularCorrection, 0.0)
+          C = b2Clamp(C + b2SettingInstance.b2_angularSlop, -b2SettingInstance.b2_maxAngularCorrection, 0.0)
         limitImpulse = -m_motorMass * C
       }
       else if m_limitState == b2LimitState.atUpperLimit {
@@ -523,7 +523,7 @@ open class b2RevoluteJoint : b2Joint {
         angularError = C
         
         // Prevent large angular corrections and allow some slop.
-        C = b2Clamp(C - b2_angularSlop, 0.0, b2_maxAngularCorrection)
+          C = b2Clamp(C - b2SettingInstance.b2_angularSlop, 0.0, b2SettingInstance.b2_maxAngularCorrection)
         limitImpulse = -m_motorMass * C
       }
       
@@ -564,7 +564,7 @@ open class b2RevoluteJoint : b2Joint {
     data.positions[m_indexB].c = cB
     data.positions[m_indexB].a = aB
     
-    return positionError <= b2_linearSlop && angularError <= b2_angularSlop
+      return positionError <= b2SettingInstance.b2_linearSlop && angularError <= b2SettingInstance.b2_angularSlop
   }
   
   // MARK: private variables

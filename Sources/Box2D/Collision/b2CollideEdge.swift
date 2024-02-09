@@ -175,8 +175,8 @@ struct b2EPAxis : CustomStringConvertible {
 
 // This holds polygon B expressed in frame A.
 struct b2TempPolygon {
-  var vertices = [b2Vec2](repeating: b2Vec2(), count: b2_maxPolygonVertices)
-  var normals = [b2Vec2](repeating: b2Vec2(), count: b2_maxPolygonVertices)
+    var vertices = [b2Vec2](repeating: b2Vec2(), count: b2SettingInstance.b2_maxPolygonVertices)
+    var normals = [b2Vec2](repeating: b2Vec2(), count: b2SettingInstance.b2_maxPolygonVertices)
   var count = 0
 }
 
@@ -377,7 +377,7 @@ class b2EPCollider {
       m_polygonB.normals[i] = b2Mul(m_xf.q, polygonB.m_normals[i])
     }
     
-    m_radius = 2.0 * b2_polygonRadius
+      m_radius = 2.0 * b2SettingInstance.b2_polygonRadius
     
     //manifold.pointCount = 0
     manifold.points.removeAll(keepingCapacity: true)
@@ -490,14 +490,14 @@ class b2EPCollider {
     // Clip to box side 1
     let clipPoints1 = b2ClipSegmentToLine(inputVertices: ie, normal: rf.sideNormal1, offset: rf.sideOffset1, vertexIndexA: rf.i1)
     
-    if clipPoints1.count < b2_maxManifoldPoints {
+      if clipPoints1.count < b2SettingInstance.b2_maxManifoldPoints {
       return manifold
     }
     
     // Clip to negative box side 1
     let clipPoints2 = b2ClipSegmentToLine(inputVertices: clipPoints1, normal: rf.sideNormal2, offset: rf.sideOffset2, vertexIndexA: rf.i2)
     
-    if clipPoints2.count < b2_maxManifoldPoints {
+      if clipPoints2.count < b2SettingInstance.b2_maxManifoldPoints {
       return manifold
     }
     
@@ -512,7 +512,7 @@ class b2EPCollider {
     }
     
     var pointCount = 0
-    for i in 0 ..< b2_maxManifoldPoints {
+      for i in 0 ..< b2SettingInstance.b2_maxManifoldPoints {
       let separation = b2Dot(rf.normal, clipPoints2[i].v - rf.v1)
       
       if separation <= m_radius {
@@ -577,12 +577,12 @@ class b2EPCollider {
       
       // Adjacency
       if b2Dot(n, perp) >= 0.0 {
-        if b2Dot(n - m_upperLimit, m_normal) < -b2_angularSlop {
+          if b2Dot(n - m_upperLimit, m_normal) < -b2SettingInstance.b2_angularSlop {
           continue
         }
       }
       else {
-        if b2Dot(n - m_lowerLimit, m_normal) < -b2_angularSlop {
+          if b2Dot(n - m_lowerLimit, m_normal) < -b2SettingInstance.b2_angularSlop {
           continue
         }
       }

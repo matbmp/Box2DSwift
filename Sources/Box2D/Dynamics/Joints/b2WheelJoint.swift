@@ -329,7 +329,7 @@ open class b2WheelJoint : b2Joint {
           let C = b2Dot(d, m_ax)
           
           // Frequency
-          let omega = 2.0 * b2_pi * m_frequencyHz
+            let omega = 2.0 * b2SettingInstance.b2_pi * m_frequencyHz
           
           // Damping coefficient
           let d = 2.0 * m_springMass * m_dampingRatio * omega
@@ -500,7 +500,7 @@ open class b2WheelJoint : b2Joint {
     data.positions[m_indexB].c = cB
     data.positions[m_indexB].a = aB
     
-    return abs(C) <= b2_linearSlop
+      return abs(C) <= b2SettingInstance.b2_linearSlop
   }
   
   // MARK: private variables

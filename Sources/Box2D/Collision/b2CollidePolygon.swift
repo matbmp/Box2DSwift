@@ -38,14 +38,14 @@ func b2FindMaxSeparation(_ poly1: b2PolygonShape, xf1: b2Transform,
   let xf = b2MulT(xf2, xf1)
   
   var bestIndex = 0
-  var maxSeparation = -b2_maxFloat
+    var maxSeparation = -b2SettingInstance.b2_maxFloat
   for i in 0 ..< count1 {
     // Get poly1 normal in frame2.
     let n = b2Mul(xf.q, n1s[i])
     let v1 = b2Mul(xf, v1s[i])
     
     // Find deepest point for normal i.
-    var si = b2_maxFloat
+      var si = b2SettingInstance.b2_maxFloat
     for j in 0 ..< count2 {
       let sij = b2Dot(n, v2s[j] - v1)
       if sij < si {
@@ -78,7 +78,7 @@ func b2FindIncidentEdge(_ poly1: b2PolygonShape, xf1: b2Transform, edge1: Int,
     
   // Find the incident edge on poly2.
   var index = 0
-  var minDot = b2_maxFloat
+    var minDot = b2SettingInstance.b2_maxFloat
   for i in 0 ..< count2 {
     let dot = b2Dot(normal1, normals2[i])
     if dot < minDot {
@@ -136,7 +136,7 @@ public func b2CollidePolygons(
   var xf1: b2Transform, xf2: b2Transform
   var edge1: Int					// reference edge
   var flip: Bool
-  let k_tol: b2Float = 0.1 * b2_linearSlop
+    let k_tol: b2Float = 0.1 * b2SettingInstance.b2_linearSlop
 
   if separationB > separationA + k_tol {
     poly1 = polyB
@@ -207,7 +207,7 @@ public func b2CollidePolygons(
   manifold.localPoint = planePoint
 
   var pointCount = 0
-  for i in 0 ..< b2_maxManifoldPoints {
+    for i in 0 ..< b2SettingInstance.b2_maxManifoldPoints {
     let separation = b2Dot(normal, clipPoints2[i].v) - frontOffset
 
     if separation <= totalRadius {

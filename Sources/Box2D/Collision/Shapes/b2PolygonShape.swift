@@ -31,7 +31,7 @@ open class b2PolygonShape : b2Shape {
     m_centroid = b2Vec2(0.0, 0.0)
     super.init()
     m_type = b2ShapeType.polygon
-    m_radius = b2_polygonRadius
+      m_radius = b2SettingInstance.b2_polygonRadius
   }
   
   /// Implement b2Shape.
@@ -55,13 +55,13 @@ open class b2PolygonShape : b2Shape {
   /// @warning collinear points are handled but not removed. Collinear points
   /// may lead to poor stacking behavior.
   open func set(vertices: [b2Vec2]) {
-    assert(3 <= vertices.count && vertices.count <= b2_maxPolygonVertices)
+      assert(3 <= vertices.count && vertices.count <= b2SettingInstance.b2_maxPolygonVertices)
     if vertices.count < 3 {
       setAsBox(halfWidth: 1.0, halfHeight: 1.0)
       return
     }
     
-    var n = min(vertices.count, b2_maxPolygonVertices)
+      var n = min(vertices.count, b2SettingInstance.b2_maxPolygonVertices)
     
     // Perform welding and copy vertices into local buffer.
     let ps = b2Array<b2Vec2>()
@@ -71,7 +71,7 @@ open class b2PolygonShape : b2Shape {
       
       var unique = true
       for j in 0 ..< ps.count {
-        if b2DistanceSquared(v, ps[j]) < ((0.5 * b2_linearSlop) * (0.5 * b2_linearSlop)) {
+          if b2DistanceSquared(v, ps[j]) < ((0.5 * b2SettingInstance.b2_linearSlop) * (0.5 * b2SettingInstance.b2_linearSlop)) {
           unique = false
           break
         }
@@ -152,7 +152,7 @@ open class b2PolygonShape : b2Shape {
       let i1 = i
       let i2 = i + 1 < m ? i + 1 : 0
       let edge = m_vertices[i2] - m_vertices[i1]
-      assert(edge.lengthSquared() > b2_epsilon * b2_epsilon)
+        assert(edge.lengthSquared() > b2SettingInstance.b2_epsilon * b2SettingInstance.b2_epsilon)
       m_normals.append(b2Cross(edge, 1.0))
       m_normals[i].normalize()
     }
@@ -375,7 +375,7 @@ open class b2PolygonShape : b2Shape {
     massData.mass = density * area
     
     // Center of mass
-    assert(area > b2_epsilon)
+      assert(area > b2SettingInstance.b2_epsilon)
     center *= 1.0 / area
     massData.center = center + s
     
@@ -484,7 +484,7 @@ private func ComputeCentroid(_ vs: b2Array<b2Vec2>) -> b2Vec2 {
   }
   
   // Centroid
-  assert(area > b2_epsilon)
+    assert(area > b2SettingInstance.b2_epsilon)
   c *= b2Float(1.0) / area
   return c
 }

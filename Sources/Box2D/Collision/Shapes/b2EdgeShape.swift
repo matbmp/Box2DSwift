@@ -37,7 +37,7 @@ open class b2EdgeShape : b2Shape {
     m_hasVertex3 = false
     super.init()
     m_type = b2ShapeType.edge
-    m_radius = b2_polygonRadius
+      m_radius = b2SettingInstance.b2_polygonRadius
   }
   
   /// Set this as an isolated edge.

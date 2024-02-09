@@ -87,8 +87,8 @@ public func b2TimeOfImpact(_ output: inout b2TOIOutput, input: b2TOIInput) {
   let tMax = input.tMax
   
   let totalRadius = proxyA.m_radius + proxyB.m_radius
-  let target = max(b2_linearSlop, totalRadius - 3.0 * b2_linearSlop)
-  let tolerance = 0.25 * b2_linearSlop
+    let target = max(b2SettingInstance.b2_linearSlop, totalRadius - 3.0 * b2SettingInstance.b2_linearSlop)
+    let tolerance = 0.25 * b2SettingInstance.b2_linearSlop
   assert(target > tolerance)
   
   var t1: b2Float = 0.0
@@ -248,7 +248,7 @@ public func b2TimeOfImpact(_ output: inout b2TOIOutput, input: b2TOIInput) {
       
       pushBackIter += 1
       
-      if pushBackIter == b2_maxPolygonVertices {
+        if pushBackIter == b2SettingInstance.b2_maxPolygonVertices {
         break
       }
     }

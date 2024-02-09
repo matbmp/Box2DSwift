@@ -69,7 +69,7 @@ public func b2CollidePolygonAndCircle(
   
   // Find the min separating edge.
   var normalIndex = 0
-  var separation = -b2_maxFloat
+    var separation = -b2SettingInstance.b2_maxFloat
   let radius = polygonA.m_radius + circleB.m_radius
   let vertexCount = polygonA.m_count
   let vertices = polygonA.m_vertices
@@ -96,7 +96,7 @@ public func b2CollidePolygonAndCircle(
   let v2 = vertices[vertIndex2]
   
   // If the center is inside the polygon ...
-  if separation < b2_epsilon {
+    if separation < b2SettingInstance.b2_epsilon {
     manifold.type = b2ManifoldType.faceA
     manifold.localNormal = normals[normalIndex]
     manifold.localPoint = 0.5 * (v1 + v2)

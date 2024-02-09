@@ -429,7 +429,7 @@ open class b2GearJoint : b2Joint {
     data.positions[m_indexD].a = aD
     
     // TODO_ERIN not implemented
-    return linearError < b2_linearSlop
+      return linearError < b2SettingInstance.b2_linearSlop
   }
   
   // MARK: private variables

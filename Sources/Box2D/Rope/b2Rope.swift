@@ -258,13 +258,13 @@ open class b2Rope {
       
       var C = angle - m_as[i]
       
-      while C > b2_pi {
-        angle -= 2 * b2_pi
+        while C > b2SettingInstance.b2_pi {
+            angle -= 2 * b2SettingInstance.b2_pi
         C = angle - m_as[i]
       }
       
-      while C < -b2_pi {
-        angle += 2.0 * b2_pi
+        while C < -b2SettingInstance.b2_pi {
+            angle += 2.0 * b2SettingInstance.b2_pi
         C = angle - m_as[i]
       }
       

@@ -325,7 +325,7 @@ open class b2Fixture : CustomStringConvertible {
     case b2ShapeType.polygon:
       let s = m_shape as! b2PolygonShape
       print("    b2PolygonShape shape;")
-      print("    b2Vec2 vs[\(b2_maxPolygonVertices)];")
+        print("    b2Vec2 vs[\(b2SettingInstance.b2_maxPolygonVertices)];")
       for i in 0 ..< s.m_count {
         print("    vs[\(i)].set(\(s.m_vertices[i].x), \(s.m_vertices[i].y))")
       }

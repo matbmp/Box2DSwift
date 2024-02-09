@@ -180,7 +180,7 @@ struct b2Simplex : CustomStringConvertible {
     if m_count > 1 {
       let metric1 = cache.metric
       let metric2 = getMetric()
-      if metric2 < 0.5 * metric1 || 2.0 * metric1 < metric2 || metric2 < b2_epsilon {
+        if metric2 < 0.5 * metric1 || 2.0 * metric1 < metric2 || metric2 < b2SettingInstance.b2_epsilon {
         // Reset the simplex.
         m_count = 0
       }
@@ -571,7 +571,7 @@ public func b2Distance(_ output: inout b2DistanceOutput, cache: inout b2SimplexC
   var saveA = [Int](repeating: 0, count: 3), saveB = [Int](repeating: 0, count: 3)
   var saveCount = 0
   
-  var distanceSqr1 = b2_maxFloat
+    var distanceSqr1 = b2SettingInstance.b2_maxFloat
   var distanceSqr2 = distanceSqr1
   
   // Main iteration loop.
@@ -613,7 +613,7 @@ public func b2Distance(_ output: inout b2DistanceOutput, cache: inout b2SimplexC
     let d = simplex.getSearchDirection()
   
     // Ensure the search direction is numerically fit.
-    if d.lengthSquared() < b2_epsilon * b2_epsilon {
+      if d.lengthSquared() < b2SettingInstance.b2_epsilon * b2SettingInstance.b2_epsilon {
       // The origin is probably contained by a line segment
       // or triangle. Thus the shapes are overlapped.
   
@@ -669,7 +669,7 @@ public func b2Distance(_ output: inout b2DistanceOutput, cache: inout b2SimplexC
     let rA = proxyA.m_radius
     let rB = proxyB.m_radius
   
-    if output.distance > rA + rB && output.distance > b2_epsilon {
+      if output.distance > rA + rB && output.distance > b2SettingInstance.b2_epsilon {
       // Shapes are still no overlapped.
       // Move the witness points to the outer surface.
       output.distance -= rA + rB

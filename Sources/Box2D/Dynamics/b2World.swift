@@ -1063,10 +1063,10 @@ open class b2World {
   // Find TOI contacts and solve them.
   func solveTOI(_ step: b2TimeStep) {
     if m_TOIIsland == nil {
-      m_TOIIsland = b2Island(2 * b2_maxTOIContacts, b2_maxTOIContacts, 0, m_contactManager.m_contactListener)
+        m_TOIIsland = b2Island(2 * b2SettingInstance.b2_maxTOIContacts, b2SettingInstance.b2_maxTOIContacts, 0, m_contactManager.m_contactListener)
     }
     else {
-      m_TOIIsland.reset(2 * b2_maxTOIContacts, b2_maxTOIContacts, 0, m_contactManager.m_contactListener)
+        m_TOIIsland.reset(2 * b2SettingInstance.b2_maxTOIContacts, b2SettingInstance.b2_maxTOIContacts, 0, m_contactManager.m_contactListener)
     }
     let island = m_TOIIsland! // never nil
     
@@ -1102,7 +1102,7 @@ open class b2World {
         }
         
         // Prevent excessive sub-stepping.
-        if c!.m_toiCount > b2_maxSubSteps {
+          if c!.m_toiCount > b2SettingInstance.b2_maxSubSteps {
           c = c!.m_next
           continue
         }
@@ -1197,7 +1197,7 @@ open class b2World {
         c = c!.m_next
       }
       
-      if minContact == nil || 1.0 - 10.0 * b2_epsilon < minAlpha {
+        if minContact == nil || 1.0 - 10.0 * b2SettingInstance.b2_epsilon < minAlpha {
         // No more TOI events. Done!
         m_stepComplete = true
         break
@@ -1438,7 +1438,7 @@ open class b2World {
     case .polygon:
       let poly = fixture.shape as! b2PolygonShape
       let vertexCount = poly.m_count
-      assert(vertexCount <= b2_maxPolygonVertices)
+        assert(vertexCount <= b2SettingInstance.b2_maxPolygonVertices)
       var vertices = [b2Vec2]()
       vertices.reserveCapacity(vertexCount)
       for i in 0 ..< vertexCount {

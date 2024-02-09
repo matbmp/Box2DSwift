@@ -219,11 +219,11 @@ open class b2WorldManifold : CustomStringConvertible {
   /**
   world contact point (point of intersection)
   */
-  open var points = [b2Vec2](repeating: b2Vec2(0, 0), count: b2_maxManifoldPoints)
+    open var points = [b2Vec2](repeating: b2Vec2(0, 0), count: b2SettingInstance.b2_maxManifoldPoints)
   /**
   a negative value indicates overlap, in meters
   */
-  open var separations = [Float](repeating: 0, count: b2_maxManifoldPoints)
+    open var separations = [Float](repeating: 0, count: b2SettingInstance.b2_maxManifoldPoints)
   /**
   Evaluate the manifold with supplied transforms. This assumes
   modest motion from the original state. This does not change the
@@ -242,7 +242,7 @@ open class b2WorldManifold : CustomStringConvertible {
       normal.set(1.0, 0.0)
       let pointA = b2Mul(xfA, manifold.localPoint)
       let pointB = b2Mul(xfB, manifold.points[0].localPoint)
-      if b2DistanceSquared(pointA, pointB) > b2_epsilon * b2_epsilon {
+        if b2DistanceSquared(pointA, pointB) > b2SettingInstance.b2_epsilon * b2SettingInstance.b2_epsilon {
         normal = pointB - pointA
         normal.normalize()
       }
@@ -452,8 +452,8 @@ public struct b2AABB : CustomStringConvertible {
   }
   
   public func rayCast(_ input: b2RayCastInput) -> b2RayCastOutput? {
-    var tmin = b2_minFloat
-    var tmax = b2_maxFloat
+      var tmin = b2SettingInstance.b2_minFloat
+      var tmax = b2SettingInstance.b2_maxFloat
     
     let p = input.p1
     let d = input.p2 - input.p1
@@ -462,7 +462,7 @@ public struct b2AABB : CustomStringConvertible {
     var normal = b2Vec2()
     
     for i in 0 ..< 2 {
-      if absD[i] < b2_epsilon {
+        if absD[i] < b2SettingInstance.b2_epsilon {
         // Parallel.
         if p[i] < lowerBound[i] || upperBound[i] < p[i] {
           return nil
@@ -568,7 +568,7 @@ public func b2TestOverlap(shapeA: b2Shape, indexA: Int,
 
   var output = b2DistanceOutput()
   b2Distance(&output, cache: &cache, input: input)
-  return output.distance < 10.0 * b2_epsilon
+    return output.distance < 10.0 * b2SettingInstance.b2_epsilon
 }
 
 public func b2TestOverlap(_ a: b2AABB, _ b: b2AABB) -> Bool {

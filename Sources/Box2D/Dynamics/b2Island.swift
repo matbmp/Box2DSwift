@@ -166,14 +166,14 @@ open class b2Island {
       
       // Check for large velocities
       let translation = h * v
-      if b2Dot(translation, translation) > b2_maxTranslationSquared {
-        let ratio = b2_maxTranslation / translation.length()
+        if b2Dot(translation, translation) > b2SettingInstance.b2_maxTranslationSquared {
+            let ratio = b2SettingInstance.b2_maxTranslation / translation.length()
         v *= ratio
       }
       
       let rotation = h * w
-      if rotation * rotation > b2_maxRotationSquared {
-        let ratio = b2_maxRotation / abs(rotation)
+        if rotation * rotation > b2SettingInstance.b2_maxRotationSquared {
+            let ratio = b2SettingInstance.b2_maxRotation / abs(rotation)
         w *= ratio
       }
       
@@ -221,10 +221,10 @@ open class b2Island {
     report(contactSolver.m_velocityConstraints)
     
     if allowSleep {
-      var minSleepTime = b2_maxFloat
+        var minSleepTime = b2SettingInstance.b2_maxFloat
       
-      let linTolSqr = b2_linearSleepTolerance * b2_linearSleepTolerance
-      let angTolSqr = b2_angularSleepTolerance * b2_angularSleepTolerance
+        let linTolSqr = b2SettingInstance.b2_linearSleepTolerance * b2SettingInstance.b2_linearSleepTolerance
+        let angTolSqr = b2SettingInstance.b2_angularSleepTolerance * b2SettingInstance.b2_angularSleepTolerance
       
       for i in 0 ..< m_bodyCount {
         let b = m_bodies[i]
@@ -244,7 +244,7 @@ open class b2Island {
         }
       }
       
-      if minSleepTime >= b2_timeToSleep && positionSolved {
+        if minSleepTime >= b2SettingInstance.b2_timeToSleep && positionSolved {
         for i in 0 ..< m_bodyCount {
           let b = m_bodies[i]
           b.setAwake(false)
@@ -342,14 +342,14 @@ open class b2Island {
       
       // Check for large velocities
       let translation = h * v
-      if b2Dot(translation, translation) > b2_maxTranslationSquared {
-        let ratio = b2_maxTranslation / translation.length()
+        if b2Dot(translation, translation) > b2SettingInstance.b2_maxTranslationSquared {
+            let ratio = b2SettingInstance.b2_maxTranslation / translation.length()
         v *= ratio
       }
       
       let rotation = h * w
-      if rotation * rotation > b2_maxRotationSquared {
-        let ratio = b2_maxRotation / abs(rotation)
+        if rotation * rotation > b2SettingInstance.b2_maxRotationSquared {
+            let ratio = b2SettingInstance.b2_maxRotation / abs(rotation)
         w *= ratio
       }
       

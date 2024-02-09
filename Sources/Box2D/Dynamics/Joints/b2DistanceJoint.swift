@@ -192,7 +192,7 @@ open class b2DistanceJoint : b2Joint {
       
     // Handle singularity.
     let length = m_u.length()
-    if length > b2_linearSlop {
+      if length > b2SettingInstance.b2_linearSlop {
       m_u *= 1.0 / length
     }
     else {
@@ -210,7 +210,7 @@ open class b2DistanceJoint : b2Joint {
       let C = length - m_length
         
       // Frequency
-      let omega = 2.0 * b2_pi * m_frequencyHz
+        let omega = 2.0 * b2SettingInstance.b2_pi * m_frequencyHz
         
       // Damping coefficient
       let d = 2.0 * m_mass * m_dampingRatio * omega
@@ -298,7 +298,7 @@ open class b2DistanceJoint : b2Joint {
       
     let length = u.normalize()
     var C = length - m_length
-    C = b2Clamp(C, -b2_maxLinearCorrection, b2_maxLinearCorrection)
+      C = b2Clamp(C, -b2SettingInstance.b2_maxLinearCorrection, b2SettingInstance.b2_maxLinearCorrection)
       
     let impulse = -m_mass * C
     let P = impulse * u
@@ -313,7 +313,7 @@ open class b2DistanceJoint : b2Joint {
     data.positions[m_indexB].c = cB
     data.positions[m_indexB].a = aB
       
-    return abs(C) < b2_linearSlop
+      return abs(C) < b2SettingInstance.b2_linearSlop
   }
   
   // MARK: private variables
