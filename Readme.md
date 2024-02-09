@@ -1,6 +1,6 @@
 # Box2DSwiftConfigurable
 
-Box2DSwiftConfigurable is a fork of Box2DSwift which is a Swift port of Box2D Physics Engine (Version 2.3.1). This fork's change is to allow to modify b2Setting at runtime.
+Box2DSwiftSafeConfigurable is a fork of Box2DSwift which is a Swift port of Box2D Physics Engine (Version 2.3.1). This fork's change is to allow to modify b2Setting at runtime and to make the creation of certaing objects safe.
 
 ## Testbed
 

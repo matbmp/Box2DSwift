@@ -54,11 +54,12 @@ open class b2PolygonShape : b2Shape {
   /// @warning the points may be re-ordered, even if they form a convex polygon
   /// @warning collinear points are handled but not removed. Collinear points
   /// may lead to poor stacking behavior.
-  open func set(vertices: [b2Vec2]) {
+  open func set(vertices: [b2Vec2]) -> Bool {
       assert(3 <= vertices.count && vertices.count <= b2SettingInstance.b2_maxPolygonVertices)
     if vertices.count < 3 {
+        
       setAsBox(halfWidth: 1.0, halfHeight: 1.0)
-      return
+        return false
     }
     
       var n = min(vertices.count, b2SettingInstance.b2_maxPolygonVertices)
@@ -85,9 +86,8 @@ open class b2PolygonShape : b2Shape {
     n = ps.count
     if n < 3 {
       // Polygon is degenerate.
-      assert(false)
       setAsBox(halfWidth: 1.0, halfHeight: 1.0)
-      return
+      return false
     }
     
     // Create the convex hull using the Gift wrapping algorithm
@@ -152,13 +152,19 @@ open class b2PolygonShape : b2Shape {
       let i1 = i
       let i2 = i + 1 < m ? i + 1 : 0
       let edge = m_vertices[i2] - m_vertices[i1]
-        assert(edge.lengthSquared() > b2SettingInstance.b2_epsilon * b2SettingInstance.b2_epsilon)
+        
+        guard (edge.lengthSquared() > b2SettingInstance.b2_epsilon * b2SettingInstance.b2_epsilon) else { return false }
       m_normals.append(b2Cross(edge, 1.0))
       m_normals[i].normalize()
     }
     
     // Compute the polygon centroid.
-    m_centroid = ComputeCentroid(m_vertices)
+      if let centroid = ComputeCentroid(m_vertices) {
+          m_centroid = centroid
+      } else {
+          return false
+      }
+      return true
   }
   
   /**
@@ -375,7 +381,9 @@ open class b2PolygonShape : b2Shape {
     massData.mass = density * area
     
     // Center of mass
-      assert(area > b2SettingInstance.b2_epsilon)
+      if !(area > b2SettingInstance.b2_epsilon) {
+          area = 2 * b2SettingInstance.b2_epsilon
+      }
     center *= 1.0 / area
     massData.center = center + s
     
@@ -446,7 +454,7 @@ open class b2PolygonShape : b2Shape {
   var m_count: Int { return m_vertices.count }
 }
 
-private func ComputeCentroid(_ vs: b2Array<b2Vec2>) -> b2Vec2 {
+private func ComputeCentroid(_ vs: b2Array<b2Vec2>) -> b2Vec2? {
   assert(vs.count >= 3)
   
   var c = b2Vec2(0.0, 0.0)
@@ -484,7 +492,7 @@ private func ComputeCentroid(_ vs: b2Array<b2Vec2>) -> b2Vec2 {
   }
   
   // Centroid
-    assert(area > b2SettingInstance.b2_epsilon)
+    guard (area > b2SettingInstance.b2_epsilon) else { return nil }
   c *= b2Float(1.0) / area
   return c
 }
