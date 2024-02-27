@@ -372,7 +372,7 @@ open class b2PrismaticJoint : b2Joint {
     // Compute motor and limit terms.
     if m_enableLimit {
       let jointTranslation = b2Dot(m_axis, d)
-        if abs(m_upperTranslation - m_lowerTranslation) < 2.0 * b2SettingInstance.b2_linearSlop {
+        if abs(m_upperTranslation - m_lowerTranslation) < 2.0 * b2Settings.Instance.b2_linearSlop {
         m_limitState = b2LimitState.equalLimits
       }
       else if jointTranslation <= m_lowerTranslation {
@@ -552,21 +552,21 @@ open class b2PrismaticJoint : b2Joint {
     var C2: b2Float = 0.0
     if m_enableLimit {
       let translation = b2Dot(axis, d)
-        if abs(m_upperTranslation - m_lowerTranslation) < 2.0 * b2SettingInstance.b2_linearSlop {
+        if abs(m_upperTranslation - m_lowerTranslation) < 2.0 * b2Settings.Instance.b2_linearSlop {
         // Prevent large angular corrections
-            C2 = b2Clamp(translation, -b2SettingInstance.b2_maxLinearCorrection, b2SettingInstance.b2_maxLinearCorrection)
+            C2 = b2Clamp(translation, -b2Settings.Instance.b2_maxLinearCorrection, b2Settings.Instance.b2_maxLinearCorrection)
         linearError = max(linearError, abs(translation))
         active = true
       }
       else if translation <= m_lowerTranslation {
         // Prevent large linear corrections and allow some slop.
-          C2 = b2Clamp(translation - m_lowerTranslation + b2SettingInstance.b2_linearSlop, -b2SettingInstance.b2_maxLinearCorrection, 0.0)
+          C2 = b2Clamp(translation - m_lowerTranslation + b2Settings.Instance.b2_linearSlop, -b2Settings.Instance.b2_maxLinearCorrection, 0.0)
         linearError = max(linearError, m_lowerTranslation - translation)
         active = true
       }
       else if translation >= m_upperTranslation {
         // Prevent large linear corrections and allow some slop.
-          C2 = b2Clamp(translation - m_upperTranslation - b2SettingInstance.b2_linearSlop, 0.0, b2SettingInstance.b2_maxLinearCorrection)
+          C2 = b2Clamp(translation - m_upperTranslation - b2Settings.Instance.b2_linearSlop, 0.0, b2Settings.Instance.b2_maxLinearCorrection)
         linearError = max(linearError, translation - m_upperTranslation)
         active = true
       }
@@ -628,7 +628,7 @@ open class b2PrismaticJoint : b2Joint {
     data.positions[m_indexB].c = cB
     data.positions[m_indexB].a = aB
     
-      return linearError <= b2SettingInstance.b2_linearSlop && angularError <= b2SettingInstance.b2_angularSlop
+      return linearError <= b2Settings.Instance.b2_linearSlop && angularError <= b2Settings.Instance.b2_angularSlop
   }
   
   // MARK: private variables

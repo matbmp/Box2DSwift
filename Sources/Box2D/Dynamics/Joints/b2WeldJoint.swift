@@ -195,7 +195,7 @@ open class b2WeldJoint : b2Joint {
       let C = aB - aA - m_referenceAngle
       
       // Frequency
-        let omega = 2.0 * b2SettingInstance.b2_pi * m_frequencyHz
+        let omega = 2.0 * b2Settings.Instance.b2_pi * m_frequencyHz
       
       // Damping coefficient
       let d = 2.0 * m * m_dampingRatio * omega
@@ -358,7 +358,7 @@ open class b2WeldJoint : b2Joint {
     data.positions[m_indexB].c = cB
     data.positions[m_indexB].a = aB
     
-      return positionError <= b2SettingInstance.b2_linearSlop && angularError <= b2SettingInstance.b2_angularSlop
+      return positionError <= b2Settings.Instance.b2_linearSlop && angularError <= b2Settings.Instance.b2_angularSlop
   }
   
   // MARK: private variables

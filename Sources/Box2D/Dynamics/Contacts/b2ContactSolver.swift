@@ -218,7 +218,7 @@ open class b2ContactSolver {
         // Setup a velocity bias for restitution.
         vcp.velocityBias = 0.0
         let vRel = b2Dot(vc.normal, vB + b2Cross(wB, vcp.rB) - vA - b2Cross(wA, vcp.rA))
-          if vRel < -b2SettingInstance.b2_velocityThreshold {
+          if vRel < -b2Settings.Instance.b2_velocityThreshold {
           vcp.velocityBias = -vc.restitution * vRel
         }
       }
@@ -647,7 +647,7 @@ open class b2ContactSolver {
         minSeparation = min(minSeparation, separation)
         
         // Prevent large corrections and allow slop.
-          let C = b2Clamp(b2SettingInstance.b2_baumgarte * (separation + b2SettingInstance.b2_linearSlop), -b2SettingInstance.b2_maxLinearCorrection, 0.0)
+          let C = b2Clamp(b2Settings.Instance.b2_baumgarte * (separation + b2Settings.Instance.b2_linearSlop), -b2Settings.Instance.b2_maxLinearCorrection, 0.0)
         
         // Compute the effective mass.
         let rnA = b2Cross(rA, normal)
@@ -675,7 +675,7 @@ open class b2ContactSolver {
     
     // We can't expect minSpeparation >= -b2_linearSlop because we don't
     // push the separation above -b2_linearSlop.
-      return minSeparation >= -3.0 * b2SettingInstance.b2_linearSlop
+      return minSeparation >= -3.0 * b2Settings.Instance.b2_linearSlop
   }
   
   func solveTOIPositionConstraints(_ toiIndexA: Int, _ toiIndexB: Int) -> Bool {
@@ -732,7 +732,7 @@ open class b2ContactSolver {
         minSeparation = min(minSeparation, separation)
         
         // Prevent large corrections and allow slop.
-          let C = b2Clamp(b2SettingInstance.b2_toiBaugarte * (separation + b2SettingInstance.b2_linearSlop), -b2SettingInstance.b2_maxLinearCorrection, 0.0)
+          let C = b2Clamp(b2Settings.Instance.b2_toiBaugarte * (separation + b2Settings.Instance.b2_linearSlop), -b2Settings.Instance.b2_maxLinearCorrection, 0.0)
         
         // Compute the effective mass.
         let rnA = b2Cross(rA, normal)
@@ -760,7 +760,7 @@ open class b2ContactSolver {
     
     // We can't expect minSpeparation >= -b2_linearSlop because we don't
     // push the separation above -b2_linearSlop.
-      return minSeparation >= -1.5 * b2SettingInstance.b2_linearSlop
+      return minSeparation >= -1.5 * b2Settings.Instance.b2_linearSlop
   }
   
   var m_step : b2TimeStep
@@ -773,7 +773,7 @@ open class b2ContactSolver {
 }
 
 open class b2ContactPositionConstraint {
-    var localPoints = [b2Vec2](repeating: b2Vec2(), count: b2SettingInstance.b2_maxManifoldPoints)
+    var localPoints = [b2Vec2](repeating: b2Vec2(), count: b2Settings.Instance.b2_maxManifoldPoints)
   var localNormal = b2Vec2()
   var localPoint = b2Vec2()
   var indexA = 0

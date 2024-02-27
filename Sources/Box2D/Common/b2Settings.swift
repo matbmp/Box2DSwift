@@ -26,9 +26,8 @@ the original C++ code written by Erin Catto.
 
 import Foundation
 
-public var b2SettingInstance = b2Settings()
-
 public struct b2Settings {
+    static let Instance = b2Settings()
     
     public var b2_minFloat = Float.leastNormalMagnitude
     public var b2_maxFloat = Float.greatestFiniteMagnitude

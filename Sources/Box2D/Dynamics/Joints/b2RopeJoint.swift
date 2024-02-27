@@ -165,7 +165,7 @@ open class b2RopeJoint : b2Joint {
       m_state = b2LimitState.inactiveLimit
     }
     
-      if m_length > b2SettingInstance.b2_linearSlop {
+      if m_length > b2Settings.Instance.b2_linearSlop {
       m_u *= 1.0 / m_length
     }
     else {
@@ -249,7 +249,7 @@ open class b2RopeJoint : b2Joint {
     let length = u.normalize()
     var C = length - m_maxLength
     
-      C = b2Clamp(C, 0.0, b2SettingInstance.b2_maxLinearCorrection)
+      C = b2Clamp(C, 0.0, b2Settings.Instance.b2_maxLinearCorrection)
     
     let impulse = -m_mass * C
     let P = impulse * u
@@ -264,7 +264,7 @@ open class b2RopeJoint : b2Joint {
     data.positions[m_indexB].c = cB
     data.positions[m_indexB].a = aB
     
-      return length - m_maxLength < b2SettingInstance.b2_linearSlop
+      return length - m_maxLength < b2Settings.Instance.b2_linearSlop
   }
   
   // MARK: private variables

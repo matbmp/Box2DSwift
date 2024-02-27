@@ -127,7 +127,7 @@ public struct b2Vec2 : Equatable, CustomStringConvertible {
   */
   @discardableResult public mutating func normalize() -> b2Float {
     let length = self.length()
-      if length < b2SettingInstance.b2_epsilon {
+      if length < b2Settings.Instance.b2_epsilon {
       return 0.0
     }
     let invLength = 1.0 / length
@@ -629,7 +629,7 @@ public struct b2Sweep : CustomStringConvertible {
   Normalize the angles.
   */
   public mutating func normalize() {
-      let twoPi = 2.0 * b2SettingInstance.b2_pi
+      let twoPi = 2.0 * b2Settings.Instance.b2_pi
     let d =  twoPi * floor(a0 / twoPi)
     a0 -= d
     a -= d

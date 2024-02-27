@@ -71,7 +71,7 @@ open class b2CircleShape : b2Shape {
     let sigma = c * c - rr * b
     
     // Check for negative discriminant and short segment.
-      if sigma < 0.0 || rr < b2SettingInstance.b2_epsilon {
+      if sigma < 0.0 || rr < b2Settings.Instance.b2_epsilon {
       return false
     }
     
@@ -100,7 +100,7 @@ open class b2CircleShape : b2Shape {
   /// @see b2Shape::ComputeMass
   open override func computeMass(density: b2Float) -> b2MassData {
     var massData = b2MassData()
-      massData.mass = density * b2SettingInstance.b2_pi * m_radius * m_radius
+      massData.mass = density * b2Settings.Instance.b2_pi * m_radius * m_radius
     massData.center = m_p
     
     // inertia about the local origin

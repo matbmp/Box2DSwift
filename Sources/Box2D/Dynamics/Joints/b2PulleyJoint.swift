@@ -63,7 +63,7 @@ open class b2PulleyJointDef : b2JointDef {
     let dB = anchorB - groundAnchorB
     self.lengthB = dB.length()
     self.ratio = ratio
-      assert(ratio > b2SettingInstance.b2_epsilon)
+      assert(ratio > b2Settings.Instance.b2_epsilon)
   }
   
   /// The first ground anchor in world coordinates. This point never moves.
@@ -231,14 +231,14 @@ open class b2PulleyJoint : b2Joint {
     let lengthA = m_uA.length()
     let lengthB = m_uB.length()
     
-      if lengthA > 10.0 * b2SettingInstance.b2_linearSlop {
+      if lengthA > 10.0 * b2Settings.Instance.b2_linearSlop {
       m_uA *= 1.0 / lengthA
     }
     else {
       m_uA.setZero()
     }
       
-      if lengthB > 10.0 * b2SettingInstance.b2_linearSlop {
+      if lengthB > 10.0 * b2Settings.Instance.b2_linearSlop {
       m_uB *= 1.0 / lengthB
     }
     else {
@@ -323,14 +323,14 @@ open class b2PulleyJoint : b2Joint {
     let lengthA = uA.length()
     let lengthB = uB.length()
       
-      if lengthA > 10.0 * b2SettingInstance.b2_linearSlop {
+      if lengthA > 10.0 * b2Settings.Instance.b2_linearSlop {
       uA *= 1.0 / lengthA
     }
     else {
       uA.setZero()
     }
       
-      if lengthB > 10.0 * b2SettingInstance.b2_linearSlop {
+      if lengthB > 10.0 * b2Settings.Instance.b2_linearSlop {
       uB *= 1.0 / lengthB
     }
     else {
@@ -368,7 +368,7 @@ open class b2PulleyJoint : b2Joint {
     data.positions[m_indexB].c = cB
     data.positions[m_indexB].a = aB
       
-      return linearError < b2SettingInstance.b2_linearSlop
+      return linearError < b2Settings.Instance.b2_linearSlop
   }
   
   // MARK: private variables

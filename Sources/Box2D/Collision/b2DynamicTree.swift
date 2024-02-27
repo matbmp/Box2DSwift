@@ -105,7 +105,7 @@ open class b2DynamicTree<T> : CustomStringConvertible {
     let proxyId = allocateNode()
     
     // Fatten the aabb.
-      let r = b2Vec2(b2SettingInstance.b2_aabbExtension, b2SettingInstance.b2_aabbExtension)
+      let r = b2Vec2(b2Settings.Instance.b2_aabbExtension, b2Settings.Instance.b2_aabbExtension)
     m_nodes[proxyId].aabb.lowerBound = aabb.lowerBound - r
     m_nodes[proxyId].aabb.upperBound = aabb.upperBound + r
     m_nodes[proxyId].userData = userData
@@ -145,12 +145,12 @@ open class b2DynamicTree<T> : CustomStringConvertible {
     
     // Extend AABB.
     var b = aabb
-      let r = b2Vec2(b2SettingInstance.b2_aabbExtension, b2SettingInstance.b2_aabbExtension)
+      let r = b2Vec2(b2Settings.Instance.b2_aabbExtension, b2Settings.Instance.b2_aabbExtension)
     b.lowerBound = b.lowerBound - r
     b.upperBound = b.upperBound + r
     
     // Predict AABB displacement.
-      let d = b2SettingInstance.b2_aabbMultiplier * displacement
+      let d = b2Settings.Instance.b2_aabbMultiplier * displacement
     
     if d.x < 0.0 {
       b.lowerBound.x += d.x
@@ -391,7 +391,7 @@ open class b2DynamicTree<T> : CustomStringConvertible {
     }
     
     while count > 1 {
-        var minCost = b2SettingInstance.b2_maxFloat
+        var minCost = b2Settings.Instance.b2_maxFloat
       var iMin = -1, jMin = -1
       for i in 0 ..< count {
         let aabbi = m_nodes[nodes[i]].aabb

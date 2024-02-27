@@ -39,7 +39,7 @@ open class b2ChainShape : b2Shape {
     m_hasNextVertex = false
     super.init()
     m_type = b2ShapeType.chain
-      m_radius = b2SettingInstance.b2_polygonRadius
+      m_radius = b2Settings.Instance.b2_polygonRadius
   }
   
   /**
@@ -54,7 +54,7 @@ open class b2ChainShape : b2Shape {
       let v1 = vertices[i-1]
       let v2 = vertices[i]
       // If the code crashes here, it means your vertices are too close together.
-        assert(b2DistanceSquared(v1, v2) > b2SettingInstance.b2_linearSlop * b2SettingInstance.b2_linearSlop)
+        assert(b2DistanceSquared(v1, v2) > b2Settings.Instance.b2_linearSlop * b2Settings.Instance.b2_linearSlop)
     }
     
     for v in vertices {
@@ -80,7 +80,7 @@ open class b2ChainShape : b2Shape {
       let v1 = vertices[i-1]
       let v2 = vertices[i]
       // If the code crashes here, it means your vertices are too close together.
-        assert(b2DistanceSquared(v1, v2) > b2SettingInstance.b2_linearSlop * b2SettingInstance.b2_linearSlop)
+        assert(b2DistanceSquared(v1, v2) > b2Settings.Instance.b2_linearSlop * b2Settings.Instance.b2_linearSlop)
     }
     
     for v in vertices {

@@ -61,8 +61,8 @@ open class b2ContactFilter {
 /// sub-step forces may approach infinity for rigid body collisions. These
 /// match up one-to-one with the contact points in b2Manifold.
 public struct b2ContactImpulse {
-    public var normalImpulses = [b2Float](repeating: 0, count: b2SettingInstance.b2_maxManifoldPoints)
-    public var tangentImpulses = [b2Float](repeating: 0, count: b2SettingInstance.b2_maxManifoldPoints)
+    public var normalImpulses = [b2Float](repeating: 0, count: b2Settings.Instance.b2_maxManifoldPoints)
+    public var tangentImpulses = [b2Float](repeating: 0, count: b2Settings.Instance.b2_maxManifoldPoints)
   public var count = 0
 }
 
