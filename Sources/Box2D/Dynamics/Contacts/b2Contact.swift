@@ -75,10 +75,10 @@ open class b2ContactEdge {
   init(contact: b2Contact) {
     self.contact = contact
   }
-  var other: b2Body!  = nil      ///< provides quick access to the other body attached.
-  unowned var contact: b2Contact ///< the contact ** parent **
-  var prev: b2ContactEdge? = nil ///< the previous contact edge in the body's contact list
-  var next: b2ContactEdge? = nil ///< the next contact edge in the body's contact list
+  open var other: b2Body!  = nil      ///< provides quick access to the other body attached.
+  open unowned var contact: b2Contact ///< the contact ** parent **
+  open var prev: b2ContactEdge? = nil ///< the previous contact edge in the body's contact list
+  open var next: b2ContactEdge? = nil ///< the next contact edge in the body's contact list
 }
 
 /// AABB in the broad-phase (except if filtered). Therefore a contact object may exist
