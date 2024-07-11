@@ -455,7 +455,9 @@ open class b2PolygonShape : b2Shape {
 }
 
 private func ComputeCentroid(_ vs: b2Array<b2Vec2>) -> b2Vec2? {
-  assert(vs.count >= 3)
+    if vs.count < 3 {
+        return nil
+    }
   
   var c = b2Vec2(0.0, 0.0)
   var area: b2Float = 0.0
