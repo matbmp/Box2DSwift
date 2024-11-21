@@ -134,7 +134,7 @@ open class b2PolygonShape : b2Shape {
         }
         
         // Collinearity check
-        if side(start: start, end: end, point) == nil && v.lengthSquared() > r.lengthSquared() {
+        if c == 0.0 {
           ie = j
         }
       }
