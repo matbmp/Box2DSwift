@@ -26,6 +26,11 @@ the original C++ code written by Erin Catto.
 
 import Foundation
 
+func side(start: b2Vec2, end: b2Vec2, _ point: b2Vec2) -> Bool? {
+    let side = (point.x - start.x) * (end.y - start.y) - (point.y - start.y) * (end.x - start.x)
+    return side == 0 ? nil : side < 0
+}
+
 open class b2PolygonShape : b2Shape {
   public override init() {
     m_centroid = b2Vec2(0.0, 0.0)
@@ -125,7 +130,7 @@ open class b2PolygonShape : b2Shape {
         }
         
         // Collinearity check
-        if c == 0.0 && v.lengthSquared() > r.lengthSquared() {
+        if side(start: ps[ie], end: ps[j], ps[hull.last!]) != nil {
           ie = j
         }
       }
