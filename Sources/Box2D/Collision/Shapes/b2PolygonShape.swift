@@ -133,7 +133,7 @@ open class b2PolygonShape : b2Shape {
         }
         
         // Collinearity check
-        if side(start: start, end: end, point) == nil {
+        if side(start: start, end: end, point) != nil {
           ie = j
         }
       }
