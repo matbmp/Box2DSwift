@@ -122,15 +122,18 @@ open class b2PolygonShape : b2Shape {
           continue
         }
         
-        let r = ps[ie] - ps[hull.last!]
-        let v = ps[j] - ps[hull.last!]
+        let start = ps[ie]
+        let end = ps[j]
+        let point = ps[hull.last!]
+        let r = start - point
+        let v = end - point
         let c = b2Cross(r, v)
         if c < 0.0 {
           ie = j
         }
         
         // Collinearity check
-        if side(start: ps[ie], end: ps[j], ps[hull.last!]) == nil {
+        if side(start: start, end: end, point) == nil {
           ie = j
         }
       }
