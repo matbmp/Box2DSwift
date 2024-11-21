@@ -128,12 +128,13 @@ open class b2PolygonShape : b2Shape {
         let r = start - point
         let v = end - point
         let c = b2Cross(r, v)
+//          (start - point).x * (end - point).y - (start - point).y * (end - point).x == 0
         if c < 0.0 {
           ie = j
         }
         
         // Collinearity check
-        if side(start: start, end: end, point) != nil {
+        if side(start: start, end: end, point) == nil && v.lengthSquared() > r.lengthSquared() {
           ie = j
         }
       }
